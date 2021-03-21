@@ -1,17 +1,17 @@
 
-# pptOS
+# pptos
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of pptOS is to ...
+The goal of pptos is to ...
 
 ## Installation
 
-You can install the released version of pptOS from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of pptos from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("pptOS")
+install.packages("pptos")
 ```
 
 ## Example
@@ -19,7 +19,7 @@ install.packages("pptOS")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-library(pptOS)
+library(pptos)
 ## basic example code
 ```
 
