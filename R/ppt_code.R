@@ -36,7 +36,7 @@ ppt_monitor <- function(data, station_type, path_out) {
   if (station_type == "nedap") {
     temp1 <- copy(setDT(data))
     temp2 <-
-      unique(temp1)[, c("date", "time") := tstrsplit(visit_time, " ", fixed =
+      unique(temp1)[, c("date", "time") := data.table::tstrsplit(visit_time, " ", fixed =
                                                        TRUE)][, c("date") := ymd(date)][, !c("visit_time", "time")]
     temp3 <-
       unique(temp2, by = c("location", "responder", "date"))[!is.na(responder)][, keyby = .(location, date), .(animal_number = .N)]
