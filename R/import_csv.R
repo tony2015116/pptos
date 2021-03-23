@@ -11,8 +11,6 @@
 #' @importFrom data.table fread
 #' @importFrom purrr map
 #' @importFrom purrr map_dfr
-#' @importFrom vroom vroom
-#' @importFrom readr read_csv
 #'
 #' @examples
 #' #all_csv <- import_csv(file_list, package = "data.table", header = T, skip = 0)
