@@ -56,7 +56,7 @@ location_monitor <- function(data, station_type, path_out) {
   temp6_1 <- temp2[, .(location, date, weight)]
   temp6_2 <- temp6_1 %>%
     tidyfst::nest_dt(location) %>%
-    tidyfst::mutate_dt(ndt = map(ndt, function(data) {
+    tidyfst::mutate_dt(ndt = furrr::map(ndt, function(data) {
       data[CJ(date = tidyr::full_seq(date, 1)), on = .(date)][CJ(date = date, unique =
                                                                    TRUE), on = .(date)]
     })) %>%
@@ -64,7 +64,7 @@ location_monitor <- function(data, station_type, path_out) {
       plot1 = purrr::map2(
         ndt,
         location,
-        ~ ggplot2::ggplot(data = .x, aes(
+        ~ ggplot2::ggplot(data = .x, ggplot2::aes(
           x = date, y = weight, group = date
         )) +
           ggplot2::geom_boxplot(outlier.color = "red") +
