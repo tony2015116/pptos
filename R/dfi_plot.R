@@ -32,10 +32,10 @@ dfi_plot <- function(dfi_data, path_out) {
       ggplot2::labs(title = paste("Location:", .y)) +
       ggplot2::theme(
         legend.position = "bottom",
-        legend.title = element_text(size = 20),
-        legend.text = element_text(size = 20),
-        axis.text.x = element_text(angle = -90, size = 8),
-        plot.title = element_text(size = 25, face = "bold")
+        legend.title = ggplot2::element_text(size = 20),
+        legend.text = ggplot2::element_text(size = 20),
+        axis.text.x = ggplot2::element_text(angle = -90, size = 8),
+        plot.title = ggplot2::element_text(size = 25, face = "bold")
       )
   )][]
   purrr::walk2(
