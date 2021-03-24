@@ -7,6 +7,7 @@
 #' @export
 #'
 #' @examples
+#' #temp2 <- outliers_found(data = temp1, weight ~ seq_days + I(seq_days^2), maxit=120)
 outliers_found <- function(data, ...) {
   . <- responder <- safe_rlm <- model_rlm <- valid_rlm <- rlm_predict <- w <- NULL
   saferlm = purrr::safely(.f = MASS::rlm)

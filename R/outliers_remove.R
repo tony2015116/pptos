@@ -7,6 +7,7 @@
 #' @export
 #'
 #' @examples
+#' #temp3 <- outliers_remove(temp2, begin_date = "2015-07-01")
 outliers_remove <- function(data, begin_date) {
   temp <- seq_days <- responder <- weight <- . <- min_weight <- max_weight <- location <- n <- max_date <-
     min_date <- date_length <- date_na <- NULL

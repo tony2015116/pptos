@@ -15,3 +15,6 @@ histgram plot of all feed intake
 \description{
 fi_plot
 }
+\examples{
+#fi_plot(data = test)
+}

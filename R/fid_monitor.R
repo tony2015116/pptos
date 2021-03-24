@@ -9,6 +9,7 @@
 #' @export
 #'
 #' @examples
+#' #fid_monitor(data = test, station_type = "nedap", path_out = "", width =60, height = 500)
 fid_monitor <- function(data, station_type, path_out, ...) {
   visit_time <- . <- location <- responder <- feed_intake <- total_intake <- percent_intake <-
     Date <- Consumed <- ndt <- plot1 <- plot2 <- all_feed_a_station_one_day <- NULL

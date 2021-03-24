@@ -19,3 +19,6 @@ pictures of growth curve
 \description{
 growth_curve
 }
+\examples{
+#growth_curve(data = temp2, w = 0.5, path_out = "")
+}

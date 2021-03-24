@@ -4,16 +4,19 @@
 \alias{csv_tranform}
 \title{csv_transform}
 \usage{
-csv_tranform(station_type, data)
+csv_tranform(data, station_type)
 }
 \arguments{
-\item{station_type}{nedap or fire stations}
-
 \item{data}{all csv data of locations}
+
+\item{station_type}{nedap or fire stations}
 }
 \value{
 nedap or fire stations with same transform format data
 }
 \description{
 csv_transform
+}
+\examples{
+#temp1 <- csv_tranform(data = test, station_type = "nedap")
 }

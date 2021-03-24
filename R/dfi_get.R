@@ -7,6 +7,7 @@
 #' @export
 #'
 #' @examples
+#' #temp5 <- dfi_get(origin_data = temp1, adg_data = temp4)
 dfi_get <- function(origin_data, adg_data) {
   . <- responder <- location <- stage <- seq_days <- ..col_names <- OE <- fiv <- median <- weight <-
     N <- dfi_error_part <- dfi_right_part <- fixed <- corrected_dfi <- adfi <- adg_0 <- NULL

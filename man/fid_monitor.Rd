@@ -21,3 +21,6 @@ pictures of each locations
 \description{
 fid_monitor
 }
+\examples{
+#fid_monitor(data = test, station_type = "nedap", path_out = "", width =60, height = 500)
+}

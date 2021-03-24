@@ -2,7 +2,7 @@ Package: pptos
 Title: Pig Performance Test Operation System
 Version: 0.0.1
 Authors@R: 
-    person(given = "Tony",
+    person(given = "Meng",
            family = "Guo",
            role = c("aut", "cre"),
            email = "tony2015116@163.com",
@@ -42,4 +42,3 @@ Suggests:
     tibble (>= 3.0.3),
     zoo (>= 1.8.8)
 Config/testthat/edition: 3
-

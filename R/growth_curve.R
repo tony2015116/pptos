@@ -8,6 +8,7 @@
 #' @export
 #'
 #' @examples
+#' #growth_curve(data = temp2, w = 0.5, path_out = "")
 growth_curve <- function(data, path_out, weighting) {
   colors <- w <- . <- location <- NULL
   temp = data.table::copy(data)[, colors := data.table::fifelse(w >= {

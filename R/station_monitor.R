@@ -8,7 +8,8 @@
 #' @export
 #'
 #' @examples
-location_monitor <- function(data, station_type, path_out) {
+#' #station_monitor(data = test, station_type = "nedap", path_out = "")
+station_monitor <- function(data, station_type, path_out) {
   visit_time <- responder <- . <- location <- animal_number <- duration <- feed_intake <- Entry <-
     Exit <- Consumed <- weight <- ndt <- . <- items <- plot1 <- NULL
   if (station_type == "nedap") {
@@ -28,15 +29,15 @@ location_monitor <- function(data, station_type, path_out) {
   if (station_type == "fire") {
     temp1 <-
       data.table::copy(setDT(data))[, Entry := do.call(paste, c(.SD, sep = " ")), .SDcol =
-                          c("Date", "Entry")][, Exit := do.call(paste, c(.SD, sep = " ")), .SDcol =
-                                                c("Date", "Exit")][, c("Entry", "Exit") := lapply(.SD, lubridate::ymd_hms), .SDcol =
-                                                                     c("Entry", "Exit")][, duration := data.table::fifelse(Exit - Entry < 0 &
-                                                                                                                 hour(Exit) == 0,
-                                                                                                               Exit - Entry + lubridate::ddays(1),
-                                                                                                               Exit - Entry)]
+                                      c("Date", "Entry")][, Exit := do.call(paste, c(.SD, sep = " ")), .SDcol =
+                                                            c("Date", "Exit")][, c("Entry", "Exit") := lapply(.SD, lubridate::ymd_hms), .SDcol =
+                                                                                 c("Entry", "Exit")][, duration := data.table::fifelse(Exit - Entry < 0 &
+                                                                                                                                         hour(Exit) == 0,
+                                                                                                                                       Exit - Entry + lubridate::ddays(1),
+                                                                                                                                       Exit - Entry)]
     data.table::setnames(temp1,
-             c(1:3, 9),
-             c("location", "responder", "date", "weight"))
+                         c(1:3, 9),
+                         c("location", "responder", "date", "weight"))
     temp2 <- unique(temp1)[, date := lubridate::ymd(date)]
     temp3 <-
       unique(temp2, by = c("location", "responder", "date"))[!is.na(responder)][, keyby = .(location, date), .(animal_number = .N)]
@@ -56,7 +57,7 @@ location_monitor <- function(data, station_type, path_out) {
   temp6_1 <- temp2[, .(location, date, weight)]
   temp6_2 <- temp6_1 %>%
     tidyfst::nest_dt(location) %>%
-    tidyfst::mutate_dt(ndt = furrr::map(ndt, function(data) {
+    tidyfst::mutate_dt(ndt = purrr::map(ndt, function(data) {
       data[CJ(date = tidyr::full_seq(date, 1)), on = .(date)][CJ(date = date, unique =
                                                                    TRUE), on = .(date)]
     })) %>%
@@ -117,7 +118,7 @@ location_monitor <- function(data, station_type, path_out) {
   temp8 <- tidyfst::left_join_dt(temp7, temp6_2, by = "location")
   temp9 <- temp8 %>%
     dplyr::mutate(finals = purrr::pmap(list(plot, plot1),
-                                ~ patchwork::wrap_plots(..1, ..2, nrow = 2))) %>% tidyfst::mutate_dt(plot_name = paste0(location, "_station.png"))
+                                       ~ patchwork::wrap_plots(..1, ..2, nrow = 2))) %>% tidyfst::mutate_dt(plot_name = paste0(location, "_station.png"))
 
   purrr::walk2(
     temp9$plot_name,

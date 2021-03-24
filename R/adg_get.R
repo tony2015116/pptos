@@ -9,6 +9,7 @@
 #' @export
 #'
 #' @examples
+#' #temp4 <- adg_get(temp3, c(60000,115000), weighting = 0.7, weight ~ seq_days, na.rm = T)
 adg_get <- function(data, my_break, weighting, ...) {
   w <- weight <- stage <- responder <- safe_lm <- model_lm <- valid_lm <- adg_0 <- . <- glance <- unchop_dt <- NULL
   label_interval <-

@@ -21,3 +21,6 @@ the adg of each animals
 \description{
 adg_get
 }
+\examples{
+#temp4 <- adg_get(temp3, c(60000,115000), weighting = 0.7, weight ~ seq_days, na.rm = T)
+}

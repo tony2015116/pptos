@@ -17,3 +17,6 @@ dfi results
 \description{
 dfi_get
 }
+\examples{
+#temp5 <- dfi_get(origin_data = temp1, adg_data = temp4)
+}

@@ -17,3 +17,6 @@ the remaining visit data from oulier_found
 \description{
 outliers_remove
 }
+\examples{
+#temp3 <- outliers_remove(temp2, begin_date = "2015-07-01")
+}

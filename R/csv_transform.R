@@ -8,7 +8,8 @@
 #' @export
 #'
 #' @examples
-csv_tranform <- function(station_type, data) {
+#' #temp1 <- csv_tranform(data = test, station_type = "nedap")
+csv_tranform <- function(data, station_type) {
   visit_time <- responder <- location <- entrancetime <- otv <- fiv <- exittime <- ltd_entrance_step1 <-
     ftd_exit_step1 <- entrancefeedweight <- exitfeedweight <- lwd_entrance_step1 <- fwd_exit_step1 <-
     weight <- frv <- lwd <- fwd <- ltd <- ftd <- seq_in_day <- . <- seq_days <- fiv_lo <- fiv_hi <-

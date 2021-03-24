@@ -6,10 +6,10 @@
 #' @export
 #'
 #' @examples
+#' #fi_plot(data = test)
 fi_plot <- function(data) {
-  fiv <- visit_time <- NULL
-  ggplot2::ggplot(data, ggplot2::aes(fiv)) +
-    ggplot2::geom_histogram(ggplot2::aes(y = ggplot2::stat(dplyr::count) / sum(dplyr::count)), binwidth = 5) +
-    ggplot2::scale_y_continuous(labels = scales::percent) +
+  feed_intake <- NULL
+  ggplot2::ggplot(data, ggplot2::aes(feed_intake)) +
+    ggplot2::geom_histogram(binwidth = 8) +
     ggplot2::theme_bw()
 }

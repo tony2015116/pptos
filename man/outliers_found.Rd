@@ -17,3 +17,6 @@ the weighting of each visit
 \description{
 outliers_found
 }
+\examples{
+#temp2 <- outliers_found(data = temp1, weight ~ seq_days + I(seq_days^2), maxit=120)
+}

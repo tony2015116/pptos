@@ -15,3 +15,6 @@ frequency of 16 error types
 \description{
 error_type_freq
 }
+\examples{
+#error_type_freq(data = temp1)
+}

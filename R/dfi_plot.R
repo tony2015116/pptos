@@ -7,6 +7,7 @@
 #' @export
 #'
 #' @examples
+#' #temp5 <- dfi_get(origin_data = temp1, adg_data = temp4)
 dfi_plot <- function(dfi_data, path_out) {
   . <- location <- data <- NULL
   corrected_dfi <- data.table::setDT(dfi_data)

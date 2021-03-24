@@ -13,10 +13,10 @@
 #' @importFrom purrr map_dfr
 #'
 #' @examples
-#' #all_csv <- import_csv(file_list, package = "data.table", header = T, skip = 0)
-#' #all_csv <- import_csv(file = file_list, package = "data.table",header = F)
-#' #all_csv <- import_csv(file = file_list, package = "vroom", col_names = T)
-#' #all_csv <- import_csv(file = file_list, package = "readr", col_names = T, col_types = "dcddcddddc")
+#' #test <- import_csv(file_list, package = "data.table", header = T, skip = 0)
+#' #test <- import_csv(file = file_list, package = "data.table",header = F)
+#' #test <- import_csv(file = file_list, package = "vroom", col_names = T)
+#' #test <- import_csv(file = file_list, package = "readr", col_names = T, col_types = "dcddcddddc")
 
 
 
