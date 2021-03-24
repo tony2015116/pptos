@@ -23,7 +23,7 @@
 import_csv <- function(file_list, package, ...) {
   if (package == "data.table") {
     data.table::rbindlist(purrr::map(file_list, function(x, ...) {
-      data.table::fread(x, ...)
+    data.table::fread(x, ...)
     }, ...))
   } else if (package == "vroom") {
     vroom::vroom(file_list, ...)

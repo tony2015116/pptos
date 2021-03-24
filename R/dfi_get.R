@@ -14,8 +14,9 @@ dfi_get <- function(origin_data, adg_data) {
   temp1_base_info = unique(adg_data[, .(responder, location, stage, date, seq_days)])
   col_names = names(origin_data)[c(1:5, 10:17, 18:33)]
   error_type = col_names[14:29]
-  temp1_inner_join = origin_data[temp1_base_info, on = c("responder", "location", "date"), nomatch = 0][, ..col_names][, OE := apply(.SD, 1, function(x)
-    sum(x, na.rm = T)), .SDcols = error_type][]
+  temp1_inner_join = origin_data[temp1_base_info, on = c("responder", "location", "date"), nomatch = 0
+                                 ][, ..col_names
+                                   ][, OE := apply(.SD, 1, function(x)sum(x, na.rm = T)), .SDcols = error_type][]
 
   origin_dfi = temp1_inner_join[, .(origin_dfi = sum(fiv)), by = .(responder, seq_days)]
 
@@ -24,7 +25,7 @@ dfi_get <- function(origin_data, adg_data) {
 
   error_dfi = temp1_inner_join[OE != 0][, .(dfi_error_part = sum(fiv)), by = .(responder, seq_days)]
   adg = unique(adg_data[, c("responder", "adg_0")])
-  bw = adg_data[, .(bw = stats::median(weight)), by = .(responder, seq_days)]
+  bw = adg_data[, .(bw = as.double(stats::median(weight))), by = .(responder, seq_days)]
 
   otd_fid_trans <- function(data, name1, name2, name3, ...) {
     temp1 <- function(col_names, ...) {
