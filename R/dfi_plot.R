@@ -21,7 +21,7 @@ dfi_plot <- function(dfi_data, path_out) {
   niuhei = mDT[, .(data = list(.SD)), location][, plot := purrr::map2(
     data,
     location,
-    ~ ggplot2::ggplot(data = .x, aes(
+    ~ ggplot2::ggplot(data = .x, ggplot2::aes(
       x = date, y = dfi, color = state
     )) +
       ggplot2::theme_bw() +

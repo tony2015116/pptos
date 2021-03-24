@@ -21,7 +21,7 @@ growth_curve <- function(data, path_out, weighting) {
     ~ ggplot2::ggplot(data = .x, ggplot2::aes(x = date, y = weight)) +
       ggplot2::theme_bw() +
       ggplot2::geom_point(size = 1, na.rm = F) +
-      ggplot2::geom_point(aes(col = colors)) +
+      ggplot2::geom_point(ggplot2::aes(col = colors)) +
       ggplot2::scale_color_manual(
         values = c("Normal" = "green", "Outlier" = "red"),
         name = "robust regression"
