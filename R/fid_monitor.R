@@ -54,22 +54,22 @@ fid_monitor <- function(data, station_type, path_out, ...) {
             breaks = seq(0, 1, 0.1)
           ) +
           ggplot2::theme(
-            plot.title = element_text(
+            plot.title = ggplot2::element_text(
               color = "black",
               hjust = 0.5,
               size = 20
             ),
-            axis.title.x = element_blank(),
-            axis.title.y = element_text(size = 15),
-            axis.text.x = element_text(size = 8, angle = 270),
-            axis.text.y = element_text(size = 8),
-            legend.title = element_text(size = 8),
-            legend.text = element_text(size = 8),
+            axis.title.x = ggplot2::element_blank(),
+            axis.title.y = ggplot2::element_text(size = 15),
+            axis.text.x = ggplot2::element_text(size = 8, angle = 270),
+            axis.text.y = ggplot2::element_text(size = 8),
+            legend.title = ggplot2::element_text(size = 8),
+            legend.text = ggplot2::element_text(size = 8),
             legend.position = "top"
           ) +
           ggplot2::guides(
-            shape = guide_legend(override.aes = list(size = 7)),
-            color = guide_legend(override.aes = list(size = 7))
+            shape = ggplot2::guide_legend(override.aes = list(size = 7)),
+            color = ggplot2::guide_legend(override.aes = list(size = 7))
           ) +
           ggplot2::ggtitle(paste0("location:", .y)) +
           ggplot2::scale_x_date(
@@ -138,20 +138,20 @@ fid_monitor <- function(data, station_type, path_out, ...) {
             show.legend = F
           ) +
           ggplot2::theme(
-            plot.title = element_text(
+            plot.title = ggplot2::element_text(
               color = "black",
               hjust = 0.5,
               size = 20
             ),
-            axis.title.x = element_text(size = 15),
-            axis.title.y = element_text(size = 15),
-            axis.text.x = element_text(size = 8, angle = 270),
-            axis.text.y = element_text(size = 8),
+            axis.title.x = ggplot2::element_text(size = 15),
+            axis.title.y = ggplot2::element_text(size = 15),
+            axis.text.x = ggplot2::element_text(size = 8, angle = 270),
+            axis.text.y = ggplot2::element_text(size = 8),
             legend.position = "none"
           ) +
           ggplot2::guides(
-            shape = guide_legend(override.aes = list(size = 7)),
-            color = guide_legend(override.aes = list(size = 7))
+            shape = ggplot2::guide_legend(override.aes = list(size = 7)),
+            color = ggplot2::guide_legend(override.aes = list(size = 7))
           ) +
           ggplot2::scale_x_date(
             date_breaks = "1 day",

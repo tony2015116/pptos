@@ -74,9 +74,9 @@ station_monitor <- function(data, station_type, path_out) {
           ggplot2::theme_bw() +
           ggplot2::theme(
             legend.position = "none",
-            axis.title.x = element_blank(),
-            axis.text.x = element_text(angle = -90),
-            axis.text = element_text(size = 8)
+            axis.title.x = ggplot2::element_blank(),
+            axis.text.x = ggplot2::element_text(angle = -90),
+            axis.text = ggplot2::element_text(size = 8)
           )
       )
     ) %>%
@@ -102,13 +102,13 @@ station_monitor <- function(data, station_type, path_out) {
           ggplot2::scale_x_date(date_breaks = "1 day", date_labels =  "%m") +
           ggplot2::scale_colour_brewer(palette = "Set1") +
           ggplot2::theme(
-            strip.text.y = element_text(angle = 0, hjust = 0),
+            strip.text.y = ggplot2::element_text(angle = 0, hjust = 0),
             legend.position = "none",
-            axis.title = element_blank(),
-            axis.text.x = element_text(angle = -90),
-            axis.text = element_text(size = 8),
+            axis.title = ggplot2::element_blank(),
+            axis.text.x = ggplot2::element_text(angle = -90),
+            axis.text = ggplot2::element_text(size = 8),
             strip.placement = "outside",
-            strip.background = element_rect(colour = "white", fill = "white")
+            strip.background = ggplot2::element_rect(colour = "white", fill = "white")
           ) +
           ggplot2::ggtitle(paste0("Location:", .y)) +
           cowplot::background_grid(minor = "none")
