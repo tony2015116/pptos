@@ -23,7 +23,7 @@ outliers_remove <- function(data, begin_date) {
       begin_date
     }
   })][lueee3, on = c("responder", "location")][min_weight <= 60000 &
-                                                 max_weight >= 110000][weight > 25000][, ':='(max_date = max(seq_days),
+                                                 max_weight >= 105000][weight > 25000][, ':='(max_date = max(seq_days),
                                                                                               min_date = min(seq_days)), .(responder, location)][, n := .N, .(responder, location)][max_date - min_date > 30 &
                                                                                                                                                                                       n > 20][CJ(date = date,
                                                                                                                                                                                                  responder = responder,
