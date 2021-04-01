@@ -29,7 +29,7 @@ import_csv <- function(file_list, package, ...) {
     vroom::vroom(file_list, ...)
   } else if (package == "readr") {
     purrr::map_dfr(file_list, function(x, ...) {
-      readr::read_csv(x, ...)
+    readr::read_csv(x, ...)
     }, ...)
   }
 }

@@ -10,7 +10,7 @@
 #' #temp5 <- dfi_get(origin_data = temp1, adg_data = temp4)
 dfi_get <- function(origin_data, adg_data) {
   . <- responder <- location <- stage <- seq_days <- ..col_names <- OE <- fiv <- median <- weight <-
-    N <- dfi_error_part <- dfi_right_part <- fixed <- corrected_dfi <- adfi <- adg_0 <- NULL
+    N <- dfi_error_part <- dfi_right_part <- fitted <- corrected_dfi <- adfi <- adg_0 <- NULL
   temp1_base_info = unique(adg_data[, .(responder, location, stage, date, seq_days)])
   col_names = names(origin_data)[c(1:5, 10:17, 18:33)]
   error_type = col_names[14:29]
@@ -117,8 +117,8 @@ dfi_get <- function(origin_data, adg_data) {
     dplyr::mutate_at("responder", as.factor)
 
   temp16 <- temp15 %>%
-    dplyr::select(responder, seq_days, fixed) %>%
-    dplyr::rename(dfi_right_part = fixed) %>%
+    dplyr::select(responder, seq_days, fitted) %>%
+    dplyr::rename(dfi_right_part = fitted) %>%
     dplyr::bind_rows(right_dfi_each_day2) %>%
     dplyr::arrange(responder, seq_days) %>%
     dplyr::inner_join(temp1_base_info2) %>%
