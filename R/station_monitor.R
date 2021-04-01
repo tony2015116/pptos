@@ -48,7 +48,7 @@ station_monitor <- function(data, station_type, path_out) {
     )]
   }
   temp5 <- merge(temp3, temp4, all.x = TRUE)
-  temp6 = data.table::melt(
+  temp6 = data.table::melt.data.table(
     temp5,
     id.vars = c("location", "date"),
     variable.name = "items",
