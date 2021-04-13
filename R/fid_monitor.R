@@ -120,7 +120,8 @@ fid_monitor <- function(data, station_type, path_out, ...) {
               "#66A61E",
               "#E6AB02",
               "#A6761D",
-              "#666666"
+              "#666666",
+              "purple"
             )
           )
       ),
@@ -201,7 +202,8 @@ fid_monitor <- function(data, station_type, path_out, ...) {
               "#66A61E",
               "#E6AB02",
               "#A6761D",
-              "#666666"
+              "#666666",
+              "purple"
             )
           )
       )

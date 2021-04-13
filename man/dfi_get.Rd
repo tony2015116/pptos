@@ -4,12 +4,14 @@
 \alias{dfi_get}
 \title{dfi_get}
 \usage{
-dfi_get(origin_data, adg_data)
+dfi_get(origin_data, adg_data, station_type)
 }
 \arguments{
 \item{origin_data}{the results from import_csv}
 
 \item{adg_data}{the results from adg_get}
+
+\item{station_type}{nedap or fire stations}
 }
 \value{
 dfi results
@@ -18,5 +20,5 @@ dfi results
 dfi_get
 }
 \examples{
-#temp5 <- dfi_get(origin_data = temp1, adg_data = temp4)
+#temp5 <- dfi_get(origin_data = temp1, adg_data = temp4, station_type = "nedap")
 }

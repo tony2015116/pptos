@@ -126,8 +126,8 @@ station_monitor <- function(data, station_type, path_out) {
     ~ ggplot2::ggsave(
       filename = paste0(path_out, .x),
       plot = .y,
-      height = 7,
-      width = 11
+      height = 9,
+      width = 18
     )
   )
 }

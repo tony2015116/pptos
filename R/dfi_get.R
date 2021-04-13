@@ -2,15 +2,19 @@
 #'
 #' @param origin_data the results from import_csv
 #' @param adg_data the results from adg_get
+#' @param station_type nedap or fire stations
 #'
 #' @return dfi results
 #' @export
 #'
 #' @examples
-#' #temp5 <- dfi_get(origin_data = temp1, adg_data = temp4)
-dfi_get <- function(origin_data, adg_data) {
+#' #temp5 <- dfi_get(origin_data = temp1, adg_data = temp4, station_type = "nedap")
+dfi_get <- function(origin_data, adg_data, station_type) {
   . <- responder <- location <- stage <- seq_days <- ..col_names <- OE <- fiv <- median <- weight <-
-    N <- dfi_error_part <- dfi_right_part <- fitted <- corrected_dfi <- adfi <- adg_0 <- NULL
+    N <- dfi_error_part <- dfi_right_part <- fitted <- corrected_dfi <- adfi <- adg_0 <- otd_1 <-
+    otd_2 <- otd_6 <- otd_7 <- otd_8 <- otd_9 <- otd_10 <- otd_11 <- otd_12 <- otd_13 <- otd_14 <-
+    fid_4 <- fid_5 <- fid_15 <- fid_16 <- fiv_lo_p <- fiv_hi_p <- fiv_0_p <- otv_lo_p <- otv_hi_p <-
+    frv_hi_fiv_lo_p <- fiv_hi_strict_p <- frv_hi_p <- frv_0_p <- frv_lo_p <- NULL
   temp1_base_info = unique(adg_data[, .(responder, location, stage, date, seq_days)])
   col_names = names(origin_data)[c(1:5, 10:17, 18:33)]
   error_type = col_names[14:29]
@@ -70,6 +74,17 @@ dfi_get <- function(origin_data, adg_data) {
 
   right_dfi_in_one_day = temp9[right_dfi, on = .(responder, seq_days)][!is.na(dfi_error_part)][, dfi_error_part := NULL]
   right_dfi_each_day = temp9[right_dfi, on = .(responder, seq_days)][is.na(dfi_error_part)][, .(responder, seq_days, dfi_right_part)]
+
+  if(station_type == "nedap"){
+    right_dfi_in_one_day = right_dfi_in_one_day[, .(responder, seq_days, otd_1, otd_2, otd_6, otd_7,
+                                                    otd_8, otd_9, otd_10, otd_11, otd_12, otd_13, otd_14, fid_4,
+                                                    fid_5, fid_15, fid_16, fiv_lo_p, fiv_hi_p, fiv_0_p, otv_lo_p,
+                                                    otv_hi_p, frv_hi_fiv_lo_p, fiv_hi_strict_p, frv_hi_p, frv_0_p,
+                                                    frv_lo_p, adg_0, bw, dfi_right_part)]
+
+  } else if(station_type == "fire"){
+    right_dfi_in_one_day = right_dfi_in_one_day
+  }
 
   temp10 <- data.table::setDF(right_dfi_in_one_day) %>%
     recipes::recipe(dfi_right_part ~ .) %>%
