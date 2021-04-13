@@ -42,7 +42,11 @@ csv_tranform <- function(data, station_type) {
         lwd_entrance_step1 = shift(entrancefeedweight, n = 1L, type = "lead"),
         fwd_exit_step1 = shift(exitfeedweight, n = 1L, type = "lag")
       )][, ':='(lwd = lwd_entrance_step1 - exitfeedweight,
-                fwd = entrancefeedweight - fwd_exit_step1)]
+                fwd = entrancefeedweight - fwd_exit_step1)
+         ][, ':='(lwd = 0,
+                  fwd = 0,
+                  ltd = 0,
+                  ftd = 0)]#nedap station new add in 2021.4.13
     })
   } else if (station_type == "fire") {
     datatoDT = setDT(data)[, 1:10]
