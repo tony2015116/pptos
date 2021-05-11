@@ -12,13 +12,13 @@ outliers_remove <- function(data, begin_date) {
   temp <- seq_days <- responder <- weight <- . <- min_weight <- max_weight <- location <- n <- max_date <-
     min_date <- date_length <- date_na <- NULL
 
-  lueee1 <- unique(data.table::copy(data))[, keyby = .(responder),temp := frankv(seq_days, ties.method = "dense") <= 3
+  lueee1 <- unique(data.table::copy(data))[, keyby = .(responder),temp := data.table::frankv(seq_days, ties.method = "dense") <= 3
   ][temp == TRUE
-  ][,keyby = .(responder, location),.(min_weight = stats::median(weight))]
+  ][weight <= 60000][,keyby = .(responder, location),.(min_weight = stats::median(weight))]
 
-  lueee2 <- unique(data.table::copy(data))[, keyby = .(responder),temp := frankv(-seq_days, ties.method = "dense") <= 3
+  lueee2 <- unique(data.table::copy(data))[, keyby = .(responder),temp := data.table::frankv(-seq_days, ties.method = "dense") <= 3
   ][temp == TRUE
-  ][,keyby = .(responder, location),.(max_weight = stats::median(weight))]
+  ][weight >= 90000][,keyby = .(responder, location),.(max_weight = stats::median(weight))]
 
   lueee3 <- merge(lueee1, lueee2, all = TRUE)
 
@@ -27,10 +27,10 @@ outliers_remove <- function(data, begin_date) {
       begin_date
     }
   })][lueee3, on = c("responder", "location")][min_weight <= 60000 & max_weight >= 95000
-                                               ][weight > 15000 & weight < 130000
+                                               ][weight >= 15000 & weight <= 130000
                                                  ][, ':='(max_date = max(seq_days), min_date = min(seq_days)), .(responder, location)
                                                    ][, n := .N, .(responder, location)
-                                                     ][max_date - min_date > 40 & n > 20
+                                                     ][max_date - min_date >= 40 & n >= 20
                                                        ][CJ(date = date,responder = responder, unique = TRUE), on = .(date, responder)
                                                          ][, location := zoo::na.locf(location, na.rm = FALSE, fromLast = T), responder
                                                            ][, location := zoo::na.locf(location, na.rm = FALSE, fromLast = F), responder
@@ -39,3 +39,4 @@ outliers_remove <- function(data, begin_date) {
                                                                  ][date_na / date_length < 1 / 3
                                                                    ][!is.na(weight)]
 }
+

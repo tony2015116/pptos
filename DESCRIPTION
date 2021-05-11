@@ -40,5 +40,6 @@ Suggests:
     recipes (>= 0.1.13),
     scales (>= 1.1.1),
     tibble (>= 3.0.3),
-    zoo (>= 1.8.8)
+    zoo (>= 1.8.8),
+    summarytools (>= 0.9.9)
 Config/testthat/edition: 3

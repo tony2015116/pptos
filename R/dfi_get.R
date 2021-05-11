@@ -10,7 +10,7 @@
 #' #temp5 <- dfi_get(origin_data = temp1, adg_data = temp4)
 dfi_get <- function(origin_data, adg_data) {
   . <- responder <- location <- stage <- seq_days <- col_names <- OE <- fiv <- median <- weight <-
-    N <- dfi_error_part <- dfi_right_part <- fitted <- corrected_dfi <- adfi <- adg_0 <- NULL
+    N <- dfi_error_part <- dfi_right_part <- fitted <- corrected_dfi <- adfi <- adg_0 <- ..col_names <- NULL
   temp1_base_info = unique(adg_data[, .(responder, location, stage, date, seq_days)])
   col_names = names(origin_data)[c(1:5, 10:17, 18:33)]
   error_type = col_names[14:29]
