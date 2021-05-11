@@ -41,5 +41,6 @@ Suggests:
     scales (>= 1.1.1),
     tibble (>= 3.0.3),
     zoo (>= 1.8.8),
-    summarytools (>= 0.9.9)
+    summarytools (>= 0.9.9),
+    rstatix (>= 0.7.0)
 Config/testthat/edition: 3

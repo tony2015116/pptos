@@ -128,6 +128,9 @@ dfi_get <- function(origin_data, adg_data) {
     dplyr::group_by(responder) %>%
     dplyr::mutate(begin_date_real = min(date),
            end_date_real = max(date))
+  temp16_1 <- temp16 %>%
+    dplyr::group_by(location) %>%
+    rstatix::get_summary_stats(corrected_dfi)
 
   temp17 <- temp16 %>%
     dplyr::group_by(responder, location, stage) %>%
@@ -145,6 +148,7 @@ dfi_get <- function(origin_data, adg_data) {
     error_free_data_trans = temp9,
     model_results = temp14,
     dfi_results = temp16,
+    dfi_stat = temp16_1,
     fcr_results = temp18
   )
 }
