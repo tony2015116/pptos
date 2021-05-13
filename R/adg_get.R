@@ -18,8 +18,8 @@ adg_get <- function(data, my_break, weighting, ...) {
     }
   safelm = purrr::safely(.f = stats::lm)
   temp1 = data.table::copy(data)[, ':='(
-    min_weight = NULL,
-    max_weight = NULL,
+    #min_weight = NULL,
+    #max_weight = NULL,
     max_date = NULL,
     min_date = NULL,
     n = NULL,

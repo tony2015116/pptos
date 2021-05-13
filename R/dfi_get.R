@@ -136,6 +136,10 @@ dfi_get <- function(origin_data, adg_data) {
     dplyr::group_by(location,responder) %>%
     rstatix::get_summary_stats(corrected_dfi)
 
+  temp16_3 <- temp16 %>%
+    dplyr::select(5,8,9) %>%
+    dplyr::distinct()
+
   temp17 <- temp16 %>%
     dplyr::group_by(responder, location, stage) %>%
     dplyr::mutate(corrected_dfi = ifelse(corrected_dfi < 0, NA, corrected_dfi)) %>%
@@ -146,7 +150,9 @@ dfi_get <- function(origin_data, adg_data) {
     dplyr::left_join(temp17) %>%
     dplyr::mutate(fcr = adfi / adg_0) %>%
     dplyr::select(-c(4:8)) %>%
-    dplyr::distinct()
+    dplyr::distinct() %>%
+    dplyr::inner_join(temp16_3) %>%
+    dplyr::select(1:3,21:22,dplyr::everything())
 
   list(
     error_free_data_trans = temp9,

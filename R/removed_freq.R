@@ -14,7 +14,7 @@ removed_freq <- function(data, begin_date) {
 
   lueee1 <- unique(data.table::copy(data))[, keyby = .(responder),temp := data.table::frankv(seq_days, ties.method = "dense") <= 3
   ][temp == TRUE
-  ][weight <= 60000][,keyby = .(responder, location),.(min_weight = stats::median(weight))]
+  ][weight <= 60000 & weight >= 15000][,keyby = .(responder, location),.(min_weight = stats::median(weight))]
 
   lueee2 <- unique(data.table::copy(data))[, keyby = .(responder),temp := data.table::frankv(-seq_days, ties.method = "dense") <= 3
   ][temp == TRUE
