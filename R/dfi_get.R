@@ -165,7 +165,7 @@ dfi_get <- function(origin_data, outlier_data, adg_data) {
     dplyr::inner_join(temp16_3) %>%
     dplyr::inner_join(temp_date) %>%
     dplyr::inner_join(temp_bw) %>%
-    dplyr::select(1:3,23:24,25:26,21:22,dplyr::everything())
+    dplyr::select(1:3,25:26,23:24,21:22,18:20)
 
   list(
     error_free_data_trans = temp9,
