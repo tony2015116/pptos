@@ -1,14 +1,15 @@
 #' dfi_get
 #'
 #' @param origin_data the results from import_csv
+#' @param outlier_data the results from outlier_found to get the real date in stations
 #' @param adg_data the results from adg_get
 #'
 #' @return dfi results
 #' @export
 #'
 #' @examples
-#' #temp5 <- dfi_get(origin_data = temp1, adg_data = temp4)
-dfi_get <- function(origin_data, adg_data) {
+#' #temp5 <- dfi_get(origin_data = temp1, outlier_data = temp2, adg_data = temp4)
+dfi_get <- function(origin_data, outlier_data, adg_data) {
   . <- responder <- location <- stage <- seq_days <- col_names <- OE <- fiv <- median <- weight <-
     N <- dfi_error_part <- dfi_right_part <- fitted <- corrected_dfi <- adfi <- adg_0 <- ..col_names <- NULL
   temp1_base_info = unique(adg_data[, .(responder, location, stage, date, seq_days)])
@@ -145,6 +146,16 @@ dfi_get <- function(origin_data, adg_data) {
     dplyr::mutate(corrected_dfi = ifelse(corrected_dfi < 0, NA, corrected_dfi)) %>%
     dplyr::summarise(adfi = mean(corrected_dfi, na.rm = TRUE))
 
+  temp_date <- outlier_data %>%
+    dplyr::group_by(responder) %>%
+    dplyr::summarise(begin_date = min(date), end_date = max(date)) %>%
+    dplyr::mutate_at("responder", as.factor)
+
+  temp_bw <- bw %>%
+    dplyr::group_by(responder) %>%
+    dplyr::summarise(min_weight_real = min(bw), max_weight_real = max(bw)) %>%
+    dplyr::mutate_at("responder", as.factor)
+
   temp18 <- adg_data %>%
     dplyr::mutate_at("responder", as.factor) %>%
     dplyr::left_join(temp17) %>%
@@ -152,7 +163,9 @@ dfi_get <- function(origin_data, adg_data) {
     dplyr::select(-c(4:8)) %>%
     dplyr::distinct() %>%
     dplyr::inner_join(temp16_3) %>%
-    dplyr::select(1:3,21:22,dplyr::everything())
+    dplyr::inner_join(temp_date) %>%
+    dplyr::inner_join(temp_bw) %>%
+    dplyr::select(1:3,23:24,25:26,21:22,dplyr::everything())
 
   list(
     error_free_data_trans = temp9,

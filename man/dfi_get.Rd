@@ -4,10 +4,12 @@
 \alias{dfi_get}
 \title{dfi_get}
 \usage{
-dfi_get(origin_data, adg_data)
+dfi_get(origin_data, outlier_data, adg_data)
 }
 \arguments{
 \item{origin_data}{the results from import_csv}
+
+\item{outlier_data}{the results from outlier_found to get the real date in stations}
 
 \item{adg_data}{the results from adg_get}
 }
@@ -18,5 +20,5 @@ dfi results
 dfi_get
 }
 \examples{
-#temp5 <- dfi_get(origin_data = temp1, adg_data = temp4)
+#temp5 <- dfi_get(origin_data = temp1, outlier_data = temp2, adg_data = temp4)
 }
