@@ -56,6 +56,7 @@ station_monitor <- function(data, station_type, path_out) {
   )
   temp6_1 <- temp2[, .(location, date, weight)]
   temp6_2 <- temp6_1 %>%
+    tidyfst::filter_dt(!is.na(location)) %>%
     tidyfst::nest_dt(location) %>%
     tidyfst::mutate_dt(ndt = purrr::map(ndt, function(data) {
       data[CJ(date = tidyr::full_seq(date, 1)), on = .(date)][CJ(date = date, unique =
