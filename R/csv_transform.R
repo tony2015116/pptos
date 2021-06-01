@@ -16,12 +16,12 @@ csv_tranform <- function(data, station_type) {
     fiv_0 <- otv_lo <- otv_hi <- frv_hi_fiv_lo <- fiv_hi_strict <- frv_hi <- frv_0 <- frv_lo <-
     lwd_lo <- lwd_hi <- fwd_lo <- fwd_hi <- ltd_lo <- ftd_lo <- NULL
   if (station_type == "nedap") {
-    datatoDT = setDT(data)[, c(1, 3:9)][, visit_time := lubridate::ymd_hms(visit_time)][!is.na(visit_time)]
+    datatoDT = data.table::setDT(data)[, c(1, 3:9)][, visit_time := lubridate::ymd_hms(visit_time)][!is.na(visit_time)]
     datatoDT2 = unique(datatoDT)[, c("date", "time") := tstrsplit(visit_time, " ", fixed =
                                                                     TRUE)]
     datatoDT3 = split(datatoDT2, by = "location")
 
-    datatoDT4 = map(datatoDT3, function(x) {
+    datatoDT4 = purrr::map(datatoDT3, function(x) {
       temp = x[order(visit_time)][responder != 0 & !is.na(location)]
       setnames(
         temp,
@@ -32,18 +32,8 @@ csv_tranform <- function(data, station_type) {
         entrancefeedweight = 0,
         exitfeedweight = 0,
         exittime = entrancetime + lubridate::seconds(otv),
-        frv = fiv / (otv / 60),
-        ltd_entrance_step1 = shift(entrancetime, n = 1L, type = "lead")
-      )][, ':='(
-        ftd_exit_step1 = shift(exittime, n = 1L, type = "lag"),
-        ltd = ltd_entrance_step1 - exittime
-      )][, ':='(
-        ftd = entrancetime - ftd_exit_step1,
-        lwd_entrance_step1 = shift(entrancefeedweight, n = 1L, type = "lead"),
-        fwd_exit_step1 = shift(exitfeedweight, n = 1L, type = "lag")
-      )][, ':='(lwd = lwd_entrance_step1 - exitfeedweight,
-                fwd = entrancefeedweight - fwd_exit_step1)
-         ][, ':='(lwd = 0,
+        frv = fiv / (otv / 60)
+      )][, ':='(lwd = 0,
                   fwd = 0,
                   ltd = 0,
                   ftd = 0)]#nedap station new add in 2021.4.13
