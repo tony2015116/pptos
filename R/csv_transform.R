@@ -17,7 +17,7 @@ csv_tranform <- function(data, station_type) {
     lwd_lo <- lwd_hi <- fwd_lo <- fwd_hi <- ltd_lo <- ftd_lo <- NULL
   if (station_type == "nedap") {
     datatoDT = data.table::setDT(data)[, c(1, 3:9)][, visit_time := lubridate::ymd_hms(visit_time)][!is.na(visit_time)]
-    datatoDT2 = unique(datatoDT)[, c("date", "time") := tstrsplit(visit_time, " ", fixed =
+    datatoDT2 = unique(datatoDT)[, c("date", "time") := data.table::tstrsplit(visit_time, " ", fixed =
                                                                     TRUE)]
     datatoDT3 = split(datatoDT2, by = "location")
 
@@ -88,7 +88,7 @@ csv_tranform <- function(data, station_type) {
       otv_lo = fifelse(otv < 0, 1, 0),
       otv_hi = fifelse(otv > 3600, 1, 0),
       frv_hi_fiv_lo = fifelse(fiv > 0 & fiv < 50 & frv > 500, 1, 0),
-      fiv_hi_strict = fifelse(fiv >= 50 &
+      frv_hi_strict = fifelse(fiv >= 50 &
                                 any(
                                   shift(fiv, type = "lag") < -20,
                                   shift(fiv, type = "lead") < -20
@@ -134,7 +134,7 @@ csv_tranform <- function(data, station_type) {
                              otv_lo,
                              otv_hi,
                              frv_hi_fiv_lo,
-                             fiv_hi_strict,
+                             frv_hi_strict,
                              frv_hi,
                              frv_0,
                              frv_lo,
